@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import { Document, Page,pdfjs } from 'react-pdf';
 
 
-
-
-
-const url =
+let url =
     "https://cors-anywhere.herokuapp.com/http://www.pdf995.com/samples/pdf.pdf"
-
 
 export default function Test() {
 
     pdfjs.GlobalWorkerOptions.workerSrc =
         `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
+
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
+    const [file, setFile] = useState(null);
 
-    /*To Prevent right click on screen*/
+
+    function onFileChange(event) {
+        setFile(event.target.files[0]);
+        console.log("event.target.files[0]", event.target.files[0])
+    }
+
     document.addEventListener("contextmenu", (event) => {
         event.preventDefault();
     });
@@ -40,14 +43,18 @@ export default function Test() {
         changePage(1);
     }
     function fileLoad() {
-        fetch("https:/jsonplaceholder.typicode.com/todos/1")
-            .then(req => req.json())
+        fetch('http://localhost:3005/a', {
+        })
+            .then(res=>res.text())
             .then(console.log)
-            .then((data)=>alert(data.value))
+      /*url = res.text();*/
     }
 
     return (
         <>
+            <label htmlFor="file">
+                Load from file: <input onChange={onFileChange} type="file" />
+            </label>
             <div className="main">
                 <button onClick={fileLoad}>Przycisk</button>
                 <div>
@@ -75,7 +82,7 @@ export default function Test() {
                     </div>
                 </div>
                 <Document
-                    file={url}
+                    file={file}
                     onLoadSuccess={onDocumentLoadSuccess}
                 >
                     <Page pageNumber={pageNumber} />
