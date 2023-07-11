@@ -3,7 +3,9 @@ import { Document, Page,pdfjs } from 'react-pdf';
 
 
 let url =
-    "https://cors-anywhere.herokuapp.com/http://www.pdf995.com/samples/pdf.pdf"
+    "https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK"
+
+
 
 export default function Test() {
 
@@ -43,17 +45,51 @@ export default function Test() {
         changePage(1);
     }
     function fileLoad() {
-        fetch('http://localhost:3005/a', {
-        })
-            .then(res=>res.text())
-            .then(console.log)
-      /*url = res.text();*/
-    }
+        /*
+                setFile("https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK")
+        */
+                /*fetch('http://localhost:3005/a')*/
+                /*    .then(res=>res.text())
+                    .then(data=>{console.log("data", data); setFile(data)})
+*/
+        fetch('http://localhost:3005/a')
+            .then((data)=>{
+/*
+                var url = window.URL.createObjectURL(data),
+*/
+                var url = window.URL.createObjectURL(new Blob([data])),
+                    anchor = document.createElement("a");
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute(
+                    'download',
+                    `FileName.pdf`,
+                );
+                console.log("link", link)
+                link.click();
+            })
 
+      /*  var save = document.createElement('a');
+        save.href = fileURL;
+        save.target = '_blank';*/
+
+
+    /*    fetch('http://localhost:3005/a', {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+        }).then(res => res.text())
+            .then(data => {
+                console.log("data", data);
+                setFile(data)
+            })*/
+    }
     return (
         <>
             <label htmlFor="file">
                 Load from file: <input onChange={onFileChange} type="file" />
+            </label>
+            <label>
+                INPUT TO HHTPS <input onChange={(e)=>{setFile(e.target.value[0]); setTimeout(()=>console.log("e.target.value[0]", e.target.value),0)}}/>
             </label>
             <div className="main">
                 <button onClick={fileLoad}>Przycisk</button>
@@ -81,8 +117,19 @@ export default function Test() {
                         </button>
                     </div>
                 </div>
+{/*                <div> DOC FROM    ->>>   https:/cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK </div>
                 <Document
-                    file={file}
+                    file={"https://cdn.filestackcontent.com/wcrjf9qPTCKXV3hMXDwK"}
+                    onLoadSuccess={onDocumentLoadSuccess}
+                >
+                    <Page pageNumber={pageNumber} />
+                </Document>
+           <div> DOC FROM SETFILE </div>
+
+                */}
+
+                <Document
+                                        file={file}
                     onLoadSuccess={onDocumentLoadSuccess}
                 >
                     <Page pageNumber={pageNumber} />
