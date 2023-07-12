@@ -52,7 +52,7 @@ export default function Test() {
                 }}/>
                 </label>
                 <div className="main">
-
+//a
 {/*
                     <button onClick={fileLoad}>Przycisk</button>
 */}
