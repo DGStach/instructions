@@ -37,9 +37,11 @@ export default function Test() {
     function nextPage() {
         changePage(1);
     }
-
-
-
+    function fileLoad(){
+        setFile("http://localhost:3005/a")
+        fetch("http://localhost:3005/a")
+            .then(res=>console.log(res))
+    }
         return (
             <>
                 <label htmlFor="file">
@@ -52,11 +54,8 @@ export default function Test() {
                 }}/>
                 </label>
                 <div className="main">
-//a
-{/*
-                    <button onClick={fileLoad}>Przycisk</button>
-*/}
 
+                    <button onClick={fileLoad}>Przycisk</button>
                     <div>
                         <div className="pagec">
                             Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
@@ -81,7 +80,7 @@ export default function Test() {
                         </div>
                     </div>
                     <Document
-                        file={"http://localhost:3005/a"}
+                        file={file}
                         onLoadSuccess={onDocumentLoadSuccess}
                     >
                         <Page pageNumber={pageNumber}/>
