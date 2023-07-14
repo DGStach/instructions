@@ -12,8 +12,8 @@ function Scanner() {
             "reader",
             {
                 qrbox: {
-                    width: 250,
-                    height: 250
+                    width: 350,
+                    height: 350
                 },
                 fps: 10
             },
@@ -26,7 +26,9 @@ function Scanner() {
         }
 
         function error(err) {
+/*
             console.warn(err);
+*/
         }
     },[]);
 
@@ -35,7 +37,7 @@ function Scanner() {
             <h1>QR Code Scanning in React</h1>
             {scanResult
                 ? <div> Success: {scanResult}</div>
-                :<div id="reader"></div>
+                :<div style={{width:"500px"}} id="reader"></div>
             }
         </div>
     )
