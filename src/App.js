@@ -1,5 +1,5 @@
 import React from 'react';
-import Pdf from"./Pdf"
+import Pdf from"../src/components/Pdf/Pdf"
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 
