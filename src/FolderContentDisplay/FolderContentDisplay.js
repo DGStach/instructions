@@ -5,27 +5,24 @@ import "./FolderContentDisplay.css"
 
 const FolderContentDisplay = () =>{
 const folderContent = [
-    {ext: "folder", product: "RB0508", id: 1},
-    {ext: "folder", product: "RB0509", id: 2},
-    {ext: "pdf", product: "RB0509", id: 2}
+    {ext: "folder", Name: "RB0508", id: 1},
+    {ext: "folder", Name: "RB0509", id: 2},
+    {ext: "pdf", Name: "RB0509", id: 2}
 
 ]
     const listItems = folderContent.map((item)=>{
         let extIcon
         if (item.ext === "folder"){
-            console.log("item.ext = folder", item.ext)
             extIcon = faFolder
         }
         if (item.ext === "pdf"){
             extIcon = faFilePdf
-            console.log("item.ext = pdf", item.ext)
-
         }
 
         return (
             <li>
                 <FontAwesomeIcon icon={extIcon} style={{color: "#35558d",}}/>
-                    {item.product}
+                    {item.Name}
             </li>
             )
     })
