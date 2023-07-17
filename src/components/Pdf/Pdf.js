@@ -14,6 +14,8 @@ export default function Test() {
     function onFileChange(event) {
         setFile(event.target.files[0]);
         console.log("event.target.files[0]", event.target.files[0])
+        setTimeout(() => console.log("EVENT", event), 0)
+
     }
 
     document.addEventListener("contextmenu", (event) => {
@@ -51,6 +53,7 @@ export default function Test() {
                     INPUT TO HHTPS <input onChange={(e) => {
                     setFile(e.target.value[0]);
                     setTimeout(() => console.log("e.target.value[0]", e.target.value), 0)
+                    setTimeout(() => console.log("this.files[0].value", this.files[0].value), 0)
                 }}/>
                 </label>
                 <div className="main">

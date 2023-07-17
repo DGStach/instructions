@@ -7,8 +7,11 @@ import Scanner from "./components/Scanner/Scanner";
 import FolderContentDisplay from "./FolderContentDisplay/FolderContentDisplay";
 
 function App() {
+/*
     const[enterFile, setEnterFile] = useState("")
+*/
     const [scanResult, setScanResult] = useState(null)
+    const [folderContent, setFolderContent] = useState([{ext: "folder", Name: "RB0508", path: "/Users/dagmara/dagmara.gabriela.stach@gmail.com - Google Drive/Mój dysk/docProdukcja/stanowiskoMontazu1/RB0508"}])
 
     useEffect(() => {
         let scanner;
@@ -37,15 +40,19 @@ function App() {
     },[]);
 
     function enterPath(){
+        let enterFile = "RB0508"
+       /* let enterFile = ""*/
         fetch(`http://localhost:3005/enterFolder?entfn=${enterFile}`)
-            .then(console.log)
+            .then(res => res.json())
+            .then(data => setFolderContent(data))
+
     }
 
     return (
         <div className="App">
-            <button style={{width: "200px", height: "50px"}} onClick={enterPath}></button>
+            <button style={{width: "200px", height: "50px"}} onClick={enterPath}> FOLDER CONTENT DISPLAY</button>
             <Scanner scanResult = {scanResult} />
-            <FolderContentDisplay/>
+            <FolderContentDisplay folderContent={folderContent}/>
             <Pdf/>
         </div>
     );
